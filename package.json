@@ -31,10 +31,15 @@
     "converter": ".bin/cli.js",
     "docsify-docx-converter": ".bin/cli.js"
   },
+  "engine": {
+    "node": "16.20.2",
+    "npm": "8.19.4"
+  },
   "dependencies": {
     "chalk": "4.1.2",
     "cheerio": "1.0.0-rc.12",
     "html-docx-js": "^0.3.1",
+    "html-to-docx": "^1.8.0",
     "image-size": "^1.0.2",
     "lodash": "^4.17.21",
     "marked": "^4.3.0",

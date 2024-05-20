@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const marked = require('marked');
-const html2Docx = require('html-docx-js');
+const html2Docx = require('html-to-docx');
 const cheerio = require('cheerio');
 const sizeOf = require('image-size');
 const chalk = require('chalk');
@@ -90,9 +90,13 @@ async function run(config) {
 
     const html = createHTMLDocument(htmlArr.join('<br/>'), bodyStyles);
 
+    const docx = await html2Docx(html, { orientation, margins })
+
+    console.log(docx);
+
     fs.writeFileSync(
       pathToPublic,
-      html2Docx.asBlob(html, { orientation, margins })
+      docx
     );
 
     console.log(
@@ -108,7 +112,7 @@ async function run(config) {
 function mdToHtml(options) {
   const { rootPath, titleDowngrade, imgMaxWidth, filePath } = options;
   return new Promise((resolve, reject) => {
-    fs.readFile(filePath, 'utf8', function (err, file) {
+    fs.readFile(filePath, 'utf8', function(err, file) {
       if (err) {
         reject(err);
         return;
